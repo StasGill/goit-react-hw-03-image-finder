@@ -31,6 +31,13 @@ export default class ImageSearch extends Component  {
     }
     
     loadMore = () => {
+
+        window.scrollTo({
+            top: document.documentElement.scrollHeight,
+            behavior: 'smooth',
+          });
+
+
         const searchQQ = this.state.searchQuery
         this.switchLoader()
         getData(this.state.currentPage + 1,searchQQ).then(data =>  this.setState( prev =>({searchItems:[...prev.searchItems,...data.hits],currentPage: prev.currentPage +1 }) ))
@@ -49,9 +56,17 @@ export default class ImageSearch extends Component  {
         
     }
     
+    
 
     componentDidMount() {
         this.loadMore()
+    }
+
+    componentDidUpdate() {
+        window.scrollTo({
+            top: document.documentElement.scrollHeight,
+            behavior: 'smooth',
+          });
     }
 
     render() {
